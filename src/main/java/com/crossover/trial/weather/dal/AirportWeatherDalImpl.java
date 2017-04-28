@@ -157,7 +157,7 @@ public class AirportWeatherDalImpl implements AirportWeatherDal {
 	 * @return AirportData deleted ariport data.
 	 */
 	@Override
-	public boolean deleteAirport(String iata) {
+	public boolean removeAirport(String iata) {
 		AirportData ad = findAirportData(iata);
 		return airportData.remove(ad);
 	}

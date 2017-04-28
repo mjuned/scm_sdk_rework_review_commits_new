@@ -140,7 +140,7 @@ public class AirportWeatherServiceImpl implements AirportWeatherService {
 	@Override
 	public boolean deleteAirport(String iata) throws WeatherException {
 		try {
-			return airportWeatherDal.deleteAirport(iata);
+			return airportWeatherDal.removeAirport(iata);
 		} catch (Throwable t) {
 			throw new WeatherException("No iata found!!.");
 		}

@@ -57,7 +57,7 @@ public class WeatherClient {
 		System.out.println("query.ping: " + response.readEntity(String.class));
 	}
 
-	public void populate(String pointType, int first, int last, int mean,
+	public void populateData(String pointType, int first, int last, int mean,
 			int median, int count) {
 		WebTarget path = collect.path("/weather/BOS/" + pointType);
 		DataPoint dp = new DataPoint.Builder().withFirst(first).withLast(last)
@@ -77,38 +77,17 @@ public class WeatherClient {
 	 * Delete iata.
 	 */
 	public void delete() {
-		WebTarget path = collect.path("/airport/BOS");
+		WebTarget path = collect.path("/airport/IAS");
 		Response response = path.request().delete();
 		System.out.println("deleted.result: " + response.getStatus());
 	}
-
-	public static void main(String[] args) throws IOException {
-
-		/**
-		 * Load airports.dat file first.
-		 */
-		AirportLoader ap = new AirportLoaderImpl();
-		ap.upload("./src/main/resources/airports.dat");
-
-		WeatherClient wc = new WeatherClient();
-		wc.pingCollect();
-		wc.populate("wind", 0, 10, 6, 4, 20);
-
-		wc.query("BOS");
-		wc.query("JFK");
-		wc.query("EWR");
-		wc.query("LGA");
-		wc.query("MMU");
-
-		// From airports.dat
-		wc.query("LPL");
-
-		// delete BOS
-		wc.delete();
-
-		wc.pingQuery();
-		wc.exit();
-		System.out.println("complete");
-		System.exit(0);
-	}
+	
+	/**
+     * Delete iata.
+     */
+    public void delete1() {
+        WebTarget path = collect.path("/airport/BOS");
+        Response response = path.request().delete();
+        System.out.println("deleted.result: " + response.getStatus());
+    }
 }
