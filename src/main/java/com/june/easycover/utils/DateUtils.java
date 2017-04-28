@@ -20,13 +20,7 @@ import jersey.repackaged.com.google.common.collect.ImmutableList;
 
 
 public class DateUtils {
-    public static final long DAYS_IN_WEEK_NUM = 7;
-
-    public static final String ISO_DATE_FORMAT = "yyyy-MM-dd";
-
-    public static final String ISO_WEEK_FORMAT = "YYYY-'W'ww";
-
-    public static final String DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+    public static final long DAYS_IN_WEEK_NUM = 7;   
 
     public static final String DATE_TIME_FORMAT_WITH_MS = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
@@ -43,8 +37,7 @@ public class DateUtils {
     public static final DateTimeFormatter DAY_OF_MONTH_AND_TIME = ofPattern("dd'T'HH:mm:ss");
 
     public static final List<DateTimeFormatter> PARAM_DATE_FORMATTERS = ImmutableList.of(
-            ofPattern(REQUEST_FORMAT),
-            ofPattern(DATE_TIME_FORMAT),
+            ofPattern(REQUEST_FORMAT),            
             ofPattern(DATE_TIME_FORMAT_WITH_MS),
             ofPattern(DATE_TIME_FORMAT_WITH_MS2));
 
@@ -59,7 +52,7 @@ public class DateUtils {
             "yyyyMMdd HHmmss",
             "dd-MM-yyyy HH:mm:ss", "yyyy-MM-dd HH:mm:ss", "MM/dd/yyyy HH:mm:ss",
             "yyyy/MM/dd HH:mm:ss",
-            "dd MMM yyyy HH:mm:ss", "dd MMMM yyyy HH:mm:ss");
+            "DD MMM yyyy HH:mm:ss", "DD MMMM yyyy HH:mm:ss");
 
     /**
      * Determine Date matching with the given date string. Returns null if format is unknown. You can
@@ -116,12 +109,7 @@ public class DateUtils {
         }
 
         return daysNum / DAYS_IN_WEEK_NUM + (daysNum % DAYS_IN_WEEK_NUM == 0 ? 0 : 1);
-    }
-
-    public static String getDateTimeString(LocalDateTime dateTime) {
-        DateTimeFormatter formatter = ofPattern(DATE_TIME_FORMAT);
-        return formatter.format(dateTime);
-    }
+    }   
 
     public static LocalDateTime timeToLocalDateTime(long millis) {
         return LocalDateTime.ofInstant(Instant.ofEpochSecond(millis), UTC);
@@ -149,6 +137,10 @@ public class DateUtils {
     }
 
     public static String dayOfMonthISO8601AndTime(LocalDateTime dateTime) {
+        return DateUtils.DAY_OF_MONTH_AND_TIME.format(dateTime);
+    }
+    
+    public static String dayOfMonthISO8601AndTimeTest(LocalDateTime dateTime) {
         return DateUtils.DAY_OF_MONTH_AND_TIME.format(dateTime);
     }
 }
